@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Parcial2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="CliRut" />
+    </Key>
+    <Property Name="CliRut" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CliNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CliDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CliGiro" Type="Int32" />
+    <Property Name="CliFonos" Type="Int32" />
+    <NavigationProperty Name="Recepcion" Relationship="Self.FK__Recepcion__CliRu__239E4DCF" FromRole="Clientes" ToRole="Recepcion" />
+  </EntityType>
+  <EntityType Name="Laboratorios">
+    <Key>
+      <PropertyRef Name="LabId" />
+    </Key>
+    <Property Name="LabId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LabNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LabMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LadDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Recepcion" Relationship="Self.FK__Recepcion__LabId__24927208" FromRole="Laboratorios" ToRole="Recepcion" />
+  </EntityType>
+  <EntityType Name="Recepcion">
+    <Key>
+      <PropertyRef Name="RecId" />
+    </Key>
+    <Property Name="RecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CliRut" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="LabId" Type="Int32" />
+    <Property Name="RecFolio" Type="Int32" />
+    <Property Name="RecFechaRecepcion" Type="DateTime" Precision="0" />
+    <Property Name="RecFechaEntrega" Type="DateTime" Precision="0" />
+    <Property Name="RecLocalidad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="RecCantidadMuestras" Type="Int32" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK__Recepcion__CliRu__239E4DCF" FromRole="Recepcion" ToRole="Clientes" />
+    <NavigationProperty Name="Laboratorios" Relationship="Self.FK__Recepcion__LabId__24927208" FromRole="Recepcion" ToRole="Laboratorios" />
+  </EntityType>
+  <Association Name="FK__Recepcion__CliRu__239E4DCF">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="CliRut" />
+      </Principal>
+      <Dependent Role="Recepcion">
+        <PropertyRef Name="CliRut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recepcion__LabId__24927208">
+    <End Role="Laboratorios" Type="Self.Laboratorios" Multiplicity="0..1" />
+    <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laboratorios">
+        <PropertyRef Name="LabId" />
+      </Principal>
+      <Dependent Role="Recepcion">
+        <PropertyRef Name="LabId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Parcial2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" />
+    <EntitySet Name="Recepcion" EntityType="Self.Recepcion" />
+    <AssociationSet Name="FK__Recepcion__CliRu__239E4DCF" Association="Self.FK__Recepcion__CliRu__239E4DCF">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Recepcion" EntitySet="Recepcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recepcion__LabId__24927208" Association="Self.FK__Recepcion__LabId__24927208">
+      <End Role="Laboratorios" EntitySet="Laboratorios" />
+      <End Role="Recepcion" EntitySet="Recepcion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

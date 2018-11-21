@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Parcial2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="CliRut" />
+          </Key>
+          <Property Name="CliRut" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="CliNombre" Type="nvarchar" MaxLength="30" />
+          <Property Name="CliDireccion" Type="nvarchar" MaxLength="30" />
+          <Property Name="CliGiro" Type="int" />
+          <Property Name="CliFonos" Type="int" />
+        </EntityType>
+        <EntityType Name="Laboratorios">
+          <Key>
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Name="LabId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LabNombre" Type="nvarchar" MaxLength="30" />
+          <Property Name="LabMail" Type="nvarchar" MaxLength="30" />
+          <Property Name="LadDireccion" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Recepcion">
+          <Key>
+            <PropertyRef Name="RecId" />
+          </Key>
+          <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CliRut" Type="nvarchar" MaxLength="11" />
+          <Property Name="LabId" Type="int" />
+          <Property Name="RecFolio" Type="int" />
+          <Property Name="RecFechaRecepcion" Type="date" />
+          <Property Name="RecFechaEntrega" Type="date" />
+          <Property Name="RecLocalidad" Type="nvarchar" MaxLength="30" />
+          <Property Name="RecCantidadMuestras" Type="int" />
+        </EntityType>
+        <Association Name="FK__Recepcion__CliRu__239E4DCF">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CliRut" />
+            </Principal>
+            <Dependent Role="Recepcion">
+              <PropertyRef Name="CliRut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recepcion__LabId__24927208">
+          <End Role="Laboratorios" Type="Self.Laboratorios" Multiplicity="0..1" />
+          <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratorios">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="Recepcion">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Parcial2ModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recepcion" EntityType="Self.Recepcion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Recepcion__CliRu__239E4DCF" Association="Self.FK__Recepcion__CliRu__239E4DCF">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Recepcion" EntitySet="Recepcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recepcion__LabId__24927208" Association="Self.FK__Recepcion__LabId__24927208">
+            <End Role="Laboratorios" EntitySet="Laboratorios" />
+            <End Role="Recepcion" EntitySet="Recepcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Parcial2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="CliRut" />
+          </Key>
+          <Property Name="CliRut" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CliNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CliDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CliGiro" Type="Int32" />
+          <Property Name="CliFonos" Type="Int32" />
+          <NavigationProperty Name="Recepcion" Relationship="Self.FK__Recepcion__CliRu__239E4DCF" FromRole="Clientes" ToRole="Recepcion" />
+        </EntityType>
+        <EntityType Name="Laboratorios">
+          <Key>
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Name="LabId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LabNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LabMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LadDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Recepcion" Relationship="Self.FK__Recepcion__LabId__24927208" FromRole="Laboratorios" ToRole="Recepcion" />
+        </EntityType>
+        <EntityType Name="Recepcion">
+          <Key>
+            <PropertyRef Name="RecId" />
+          </Key>
+          <Property Name="RecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CliRut" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="LabId" Type="Int32" />
+          <Property Name="RecFolio" Type="Int32" />
+          <Property Name="RecFechaRecepcion" Type="DateTime" Precision="0" />
+          <Property Name="RecFechaEntrega" Type="DateTime" Precision="0" />
+          <Property Name="RecLocalidad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RecCantidadMuestras" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Recepcion__CliRu__239E4DCF" FromRole="Recepcion" ToRole="Clientes" />
+          <NavigationProperty Name="Laboratorios" Relationship="Self.FK__Recepcion__LabId__24927208" FromRole="Recepcion" ToRole="Laboratorios" />
+        </EntityType>
+        <Association Name="FK__Recepcion__CliRu__239E4DCF">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CliRut" />
+            </Principal>
+            <Dependent Role="Recepcion">
+              <PropertyRef Name="CliRut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recepcion__LabId__24927208">
+          <End Role="Laboratorios" Type="Self.Laboratorios" Multiplicity="0..1" />
+          <End Role="Recepcion" Type="Self.Recepcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratorios">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="Recepcion">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Parcial2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" />
+          <EntitySet Name="Recepcion" EntityType="Self.Recepcion" />
+          <AssociationSet Name="FK__Recepcion__CliRu__239E4DCF" Association="Self.FK__Recepcion__CliRu__239E4DCF">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Recepcion" EntitySet="Recepcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recepcion__LabId__24927208" Association="Self.FK__Recepcion__LabId__24927208">
+            <End Role="Laboratorios" EntitySet="Laboratorios" />
+            <End Role="Recepcion" EntitySet="Recepcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Parcial2ModelStoreContainer" CdmEntityContainer="Parcial2Entities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="Parcial2Model.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="CliRut" ColumnName="CliRut" />
+                <ScalarProperty Name="CliNombre" ColumnName="CliNombre" />
+                <ScalarProperty Name="CliDireccion" ColumnName="CliDireccion" />
+                <ScalarProperty Name="CliGiro" ColumnName="CliGiro" />
+                <ScalarProperty Name="CliFonos" ColumnName="CliFonos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laboratorios">
+            <EntityTypeMapping TypeName="Parcial2Model.Laboratorios">
+              <MappingFragment StoreEntitySet="Laboratorios">
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+                <ScalarProperty Name="LabNombre" ColumnName="LabNombre" />
+                <ScalarProperty Name="LabMail" ColumnName="LabMail" />
+                <ScalarProperty Name="LadDireccion" ColumnName="LadDireccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recepcion">
+            <EntityTypeMapping TypeName="Parcial2Model.Recepcion">
+              <MappingFragment StoreEntitySet="Recepcion">
+                <ScalarProperty Name="RecId" ColumnName="RecId" />
+                <ScalarProperty Name="CliRut" ColumnName="CliRut" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+                <ScalarProperty Name="RecFolio" ColumnName="RecFolio" />
+                <ScalarProperty Name="RecFechaRecepcion" ColumnName="RecFechaRecepcion" />
+                <ScalarProperty Name="RecFechaEntrega" ColumnName="RecFechaEntrega" />
+                <ScalarProperty Name="RecLocalidad" ColumnName="RecLocalidad" />
+                <ScalarProperty Name="RecCantidadMuestras" ColumnName="RecCantidadMuestras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

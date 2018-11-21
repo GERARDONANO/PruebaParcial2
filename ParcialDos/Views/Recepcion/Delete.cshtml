@@ -1,0 +1,80 @@
+﻿@model ParcialDos.Models.Recepcion
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Está seguro de eliminar este registro?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecFolio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecFolio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecFechaRecepcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecFechaRecepcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecFechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecFechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecLocalidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecLocalidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecCantidadMuestras)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecCantidadMuestras)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clientes.CliNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clientes.CliNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laboratorios.LabNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laboratorios.LabNombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>

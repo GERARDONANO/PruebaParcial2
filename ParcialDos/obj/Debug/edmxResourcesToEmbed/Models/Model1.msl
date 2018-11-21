@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Parcial2ModelStoreContainer" CdmEntityContainer="Parcial2Entities">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="Parcial2Model.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="CliRut" ColumnName="CliRut" />
+          <ScalarProperty Name="CliNombre" ColumnName="CliNombre" />
+          <ScalarProperty Name="CliDireccion" ColumnName="CliDireccion" />
+          <ScalarProperty Name="CliGiro" ColumnName="CliGiro" />
+          <ScalarProperty Name="CliFonos" ColumnName="CliFonos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Laboratorios">
+      <EntityTypeMapping TypeName="Parcial2Model.Laboratorios">
+        <MappingFragment StoreEntitySet="Laboratorios">
+          <ScalarProperty Name="LabId" ColumnName="LabId" />
+          <ScalarProperty Name="LabNombre" ColumnName="LabNombre" />
+          <ScalarProperty Name="LabMail" ColumnName="LabMail" />
+          <ScalarProperty Name="LadDireccion" ColumnName="LadDireccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recepcion">
+      <EntityTypeMapping TypeName="Parcial2Model.Recepcion">
+        <MappingFragment StoreEntitySet="Recepcion">
+          <ScalarProperty Name="RecId" ColumnName="RecId" />
+          <ScalarProperty Name="CliRut" ColumnName="CliRut" />
+          <ScalarProperty Name="LabId" ColumnName="LabId" />
+          <ScalarProperty Name="RecFolio" ColumnName="RecFolio" />
+          <ScalarProperty Name="RecFechaRecepcion" ColumnName="RecFechaRecepcion" />
+          <ScalarProperty Name="RecFechaEntrega" ColumnName="RecFechaEntrega" />
+          <ScalarProperty Name="RecLocalidad" ColumnName="RecLocalidad" />
+          <ScalarProperty Name="RecCantidadMuestras" ColumnName="RecCantidadMuestras" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ParcialDos.Models.Recepcion>
+
+@{
+    ViewBag.Title = "Registros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFolio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFechaRecepcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFechaEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecLocalidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecCantidadMuestras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clientes.CliNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Laboratorios.LabNombre)
+        </th>
+        <th>@Html.DisplayName("Acciones")</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecFolio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecFechaRecepcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecFechaEntrega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecLocalidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecCantidadMuestras)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clientes.CliNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Laboratorios.LabNombre)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.RecId }) |
+       
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.RecId })
+        </td>
+    </tr>
+}
+
+</table>
